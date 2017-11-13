@@ -3,5 +3,5 @@ project(AAL_Boxes)
 
 set(CMAKE_CXX_STANDARD 11)
 
-set(SOURCE_FILES main.cpp)
+set(SOURCE_FILES main.cpp boxes_aficionado/Box.cpp boxes_aficionado/algorithms/BrutForceAlgorithm.cpp)
 add_executable(AAL_Boxes ${SOURCE_FILES})

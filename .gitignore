@@ -5,6 +5,6 @@
 # IntelliJ project files
 .idea
 *.iml
-cmake-build-debug
+cmake-build-debug/
 out
 gen

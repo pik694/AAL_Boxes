@@ -9,12 +9,13 @@
 #include <vector>
 #include "../Box.hpp"
 
+
+using namespace boxes_aficionado;
+
 namespace boxes_aficionado::algorithms {
 
-	using namespace boxes_aficionado;
-
 	class Algorithm {
-		virtual int compute(std::vector<Box>) = 0;
+		virtual std::pair<std::vector<Box>, uint64_t> compute(std::vector<Box>) = 0;
 	};
 }
 

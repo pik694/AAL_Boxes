@@ -13,14 +13,14 @@ namespace boxes_aficionado::algorithms {
 
 		BrutForceAlgorithm();
 
-		virtual int compute(std::vector<Box>);
+		virtual std::pair<std::vector<Box>, uint64_t> compute(std::vector<Box>) override;
 	private:
 
 
-		uint64_t getVolume(const std::vector<Box> &);
+		uint64_t getVolume(const std::vector<Box> &) const;
 
 		uint64_t minVolume_;
-
+		std::vector<Box> bestPermutation_;
 	};
 }
 

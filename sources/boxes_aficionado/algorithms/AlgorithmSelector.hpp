@@ -11,15 +11,17 @@
 
 namespace boxes_aficionado::algorithms{
 
+
 	class AlgorithmSelector{
 	public:
 
-		inline static std::shared_ptr<Algorithm> getAlgorithm(std::string algorithm){
-			if (algorithm == "-brut")
-				return std::make_shared<BrutForceAlgorithm>();
+		static std::unique_ptr<Algorithm> getAlgorithm(std::string algorithm) {
+			if (algorithm == "brut")
+				return std::make_unique<BrutForceAlgorithm>();
 			throw std::invalid_argument("Unexpected algorithm value : " + algorithm);
 		}
 	};
+
 }
 
 

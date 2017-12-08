@@ -6,8 +6,6 @@
 #define AAL_BOXES_BOX_HPP
 
 #include <cstdint>
-#include <type_traits>
-#include <initializer_list>
 
 namespace boxes_aficionado {
 
@@ -15,8 +13,6 @@ namespace boxes_aficionado {
 	public:
 
 		Box(uint16_t x, uint16_t y, uint16_t z);
-
-		Box(const Box &) = default;
 
 		uint64_t getVolume() const;
 
@@ -37,25 +33,12 @@ namespace boxes_aficionado {
 			return !(this->operator<(rBox));
 		}
 
-		Box &operator=(const Box &rBox) {
-
-			const_cast<int &>(id_) = rBox.id_;
-			x_ = rBox.x_;
-			y_ = rBox.y_;
-			z_ = rBox.z_;
-			volume_ = rBox.volume_;
-
-			return *this;
-		}
-
-
-
 	private:
 		uint16_t x_;
 		uint16_t y_;
 		uint16_t z_;
 		uint64_t volume_;
-		const int id_;
+		int id_;
 		static int currID_;
 
 	};

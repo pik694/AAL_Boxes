@@ -9,6 +9,8 @@
 #include <iostream>
 #include <boost/program_options.hpp>
 
+#include "problem_instance/ProblemInstance.hpp"
+
 using namespace boost::program_options;
 
 
@@ -36,6 +38,22 @@ namespace boxes_aficionado {
 
 		}
 
+		std::unique_ptr<ProblemInstance> parse(int argc, const char **argv) {
+
+			store(parse_command_line(argc, argv, description_), variablesMap_);
+			notify(variablesMap_);
+
+			if (variablesMap_.count(HELP_CMD)) {
+
+				variablesMap_
+
+						exit(0);
+			}
+
+			//return std::make_unique<ProblemInstance>();
+		}
+
+
 	private:
 		cstr_t HELP_CMD = "help";
 		cstr_t VERSION_CMD = "version";
@@ -44,7 +62,10 @@ namespace boxes_aficionado {
 		cstr_t EXECUTION_MODE_CMD = "mode";
 		cstr_t PROBLEM_SIZE_CMD = "size";
 		cstr_t ALGORITHM_SELECTION = "algorithm";
+
 		options_description description_;
+		variables_map variablesMap_;
+
 
 		const char *command(std::string longCommand, std::string shortCommand) const {
 			return (longCommand + "," + shortCommand).c_str();

@@ -12,7 +12,7 @@ if (Boost_FOUND)
 endif ()
 
 
-set(SOURCE_FILES sources/main.cpp sources/boxes_aficionado/Box.cpp sources/boxes_aficionado/algorithms/BrutForceAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.hpp sources/boxes_aficionado/BoxesProvider.hpp sources/boxes_aficionado/ProgramInitializer.hpp sources/boxes_aficionado/ProblemInstance.hpp)
+set(SOURCE_FILES sources/main.cpp sources/boxes_aficionado/Box.cpp sources/boxes_aficionado/algorithms/BrutForceAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.hpp sources/boxes_aficionado/BoxesProvider.hpp sources/boxes_aficionado/ProgramInitializer.hpp sources/boxes_aficionado/problem_instance/ProblemInstance.hpp)
 add_executable(AAL_Boxes ${SOURCE_FILES})
 
 if (Boost_FOUND)

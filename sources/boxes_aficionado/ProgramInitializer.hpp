@@ -21,8 +21,8 @@ using namespace boost::program_options;
 
 namespace boxes_aficionado {
 
-	enum class ExecutionMode_e {
-		generateProblem, generateAndSolve, solve,
+	enum class ExecutionMode_E {
+		generateProblem, generateAndSolve, solve
 	};
 
 	class ProgramInitializer {
@@ -39,7 +39,7 @@ namespace boxes_aficionado {
 					(command(VERSION_CMD, "v").c_str(), "Print version info")
 					(command(INPUT_FILE_CMD, "i").c_str(), value<std::string>(), "Specify path to the input file")
 					(command(OUTPUT_FILE_CMD, "o").c_str(), value<std::string>(), "Specify path to the output file")
-					(command(EXECUTION_MODE_CMD, "m").c_str(), value<int>(),
+					(command(EXECUTION_MODE_CMD, "m").c_str(), value<ExecutionMode_E>(),
 					 "Choose execution mode (look size option):\n0 - generate problem,\n1 - generate and solve,\n2 - solve given problem\n")
 					(command(PROBLEM_SIZE_CMD, "s").c_str(), value<int>(), "Specifies generated problem size")
 					(command(ALGORITHM_SELECTION, "a").c_str(), value<std::shared_ptr<algorithms::Algorithm>>(),
@@ -67,6 +67,21 @@ namespace boxes_aficionado {
 				exit(1);
 			}
 
+			ExecutionMode_E executionMode = variablesMap_.at(EXECUTION_MODE_CMD).as<ExecutionMode_E>();
+
+			if (executionMode == ExecutionMode_E::generateProblem) {
+				//TODO
+			} else if (executionMode == ExecutionMode_E::solve) {
+				//TODO
+			} else if (executionMode == ExecutionMode_E::generateAndSolve) {
+				//TODO
+			} else {
+				throw std::runtime_error("Invalid execution mode" + std::to_string(static_cast<int>(executionMode)));
+			}
+
+			//TODO: ^ decorator or composition.
+			//TODO: if program should generate data then check whether user has provided problem size
+			//TODO: in case of solve - check whether user has provided algorithm
 
 
 			//return std::make_unique<ProblemInstance>();
@@ -91,6 +106,7 @@ namespace boxes_aficionado {
 		};
 
 	};
+
 }
 
 namespace boost {
@@ -101,6 +117,18 @@ namespace boost {
 		return std::make_shared<algorithms::BrutForceAlgorithm>();
 
 	}
+
+	template<>
+	ExecutionMode_E lexical_cast(const std::string &name) {
+		static const std::map<const std::string, ExecutionMode_E> map = {
+				{std::to_string(static_cast<int>(ExecutionMode_E::solve)),            ExecutionMode_E::solve},
+				{std::to_string(
+						static_cast<int>(ExecutionMode_E::generateAndSolve)),         ExecutionMode_E::generateAndSolve},
+				{std::to_string(static_cast<int>(ExecutionMode_E::generateProblem)),  ExecutionMode_E::generateProblem}
+		};
+		return map.at(name);
+	}
+
 
 }
 

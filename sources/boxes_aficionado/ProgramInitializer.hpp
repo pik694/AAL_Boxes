@@ -5,6 +5,11 @@
 #ifndef AAL_BOXES_PROGRAMINITIALIZER_HPP
 #define AAL_BOXES_PROGRAMINITIALIZER_HPP
 
+struct {
+	unsigned int MINOR = 1;
+	unsigned int MAJOR = 0;
+} APP_VERSION;
+
 #include <string>
 #include <iostream>
 #include <boost/program_options.hpp>
@@ -26,29 +31,43 @@ namespace boxes_aficionado {
 	public:
 
 		ProgramInitializer() : description_("Allowed options") {
+
+			std::string str = std::string(command(HELP_CMD, "h"));
+
 			description_.add_options()
-					(command(HELP_CMD, "h"), "Show this help message")
-					(command(VERSION_CMD, "v"), "Print version info")
-					(command(INPUT_FILE_CMD, "i"), value<std::string>(), "Specify path to the input file")
-					(command(OUTPUT_FILE_CMD, "o"), value<std::string>(), "Specify path to the output file")
-					(command(EXECUTION_MODE_CMD, "m"), value<int>(), "Choose execution mode. 0 - generate problem, ")
-					(command(PROBLEM_SIZE_CMD, "s"), value<int>(), "Specifies generated problem size")
-					(command(ALGORITHM_SELECTION, "a"), value<std::shared_ptr<algorithms::Algorithm>>(),
-					 "Select algorithm. 0 - brut force, 1 - heuristic, ");
+					(command(HELP_CMD, "h").c_str(), "Show this help message")
+					(command(VERSION_CMD, "v").c_str(), "Print version info")
+					(command(INPUT_FILE_CMD, "i").c_str(), value<std::string>(), "Specify path to the input file")
+					(command(OUTPUT_FILE_CMD, "o").c_str(), value<std::string>(), "Specify path to the output file")
+					(command(EXECUTION_MODE_CMD, "m").c_str(), value<int>(),
+					 "Choose execution mode (look size option):\n0 - generate problem,\n1 - generate and solve,\n2 - solve given problem\n")
+					(command(PROBLEM_SIZE_CMD, "s").c_str(), value<int>(), "Specifies generated problem size")
+					(command(ALGORITHM_SELECTION, "a").c_str(), value<std::shared_ptr<algorithms::Algorithm>>(),
+					 "Select algorithm:\n0 - brut force,\n1 - heuristic.");
 
 		}
 
-		std::unique_ptr<ProblemInstance> parse(int argc, const char **argv) {
+		/*std::unique_ptr<ProblemInstance>*/ void parse(int argc, const char **argv) {
 
 			store(parse_command_line(argc, argv, description_), variablesMap_);
 			notify(variablesMap_);
 
 			if (variablesMap_.count(HELP_CMD)) {
-
-				variablesMap_
-
-						exit(0);
+				std::cout << description_ << std::endl;
+				exit(0);
 			}
+
+			if (variablesMap_.count(VERSION_CMD)) {
+				std::cout << "Version : " << APP_VERSION.MAJOR << "." << APP_VERSION.MINOR << std::endl;
+				exit(0);
+			}
+
+			if (!variablesMap_.count(EXECUTION_MODE_CMD)) {
+				std::cerr << "Provide execution mode!" << std::endl;
+				exit(1);
+			}
+
+
 
 			//return std::make_unique<ProblemInstance>();
 		}
@@ -67,8 +86,8 @@ namespace boxes_aficionado {
 		variables_map variablesMap_;
 
 
-		const char *command(std::string longCommand, std::string shortCommand) const {
-			return (longCommand + "," + shortCommand).c_str();
+		std::string command(std::string longCommand, std::string shortCommand) const {
+			return (longCommand + "," + shortCommand);
 		};
 
 	};
@@ -84,6 +103,5 @@ namespace boost {
 	}
 
 }
-
 
 #endif //AAL_BOXES_PROGRAMINITIALIZER_HPP

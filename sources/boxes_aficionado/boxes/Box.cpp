@@ -4,7 +4,7 @@
 
 #include "Box.hpp"
 
-using namespace boxes_aficionado;
+using namespace boxes_aficionado::boxes;
 
 int Box::currID_ = 0;
 
@@ -30,4 +30,12 @@ bool Box::fits(const Box& anotherBox) const{
 	        || (x_ < anotherBox.z_ && y_ < anotherBox.x_ && z_ < anotherBox.y_)
 	        || (x_ < anotherBox.z_ && y_ < anotherBox.y_ && z_ < anotherBox.x_));
 }
+
+
+namespace boxes_aficionado::boxes {
+	std::ostream &operator<<(std::ostream &out, const Box &box) {
+		return out << box.x_ << " " << box.y_ << " " << box.z_;
+	}
+}
+
 

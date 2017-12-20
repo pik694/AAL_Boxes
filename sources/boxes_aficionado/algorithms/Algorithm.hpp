@@ -7,14 +7,15 @@
 
 
 #include <vector>
-#include "../Box.hpp"
+#include "../boxes/Box.hpp"
 
 
-using namespace boxes_aficionado;
+using namespace boxes_aficionado::boxes;
 
 namespace boxes_aficionado::algorithms {
 
 	class Algorithm {
+	public:
 		virtual std::pair<std::vector<Box>, uint64_t> compute(std::vector<Box>) = 0;
 	};
 }

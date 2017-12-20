@@ -14,7 +14,7 @@ struct {
 #include <iostream>
 #include <boost/program_options.hpp>
 
-#include "problem_instance/ProblemInstance.hpp"
+#include "ProblemInstance.hpp"
 
 using namespace boost::program_options;
 
@@ -112,20 +112,23 @@ namespace boxes_aficionado {
 namespace boost {
 
 	template<>
-	std::shared_ptr<algorithms::Algorithm> lexical_cast(const std::string &name) {
+	std::shared_ptr<boxes_aficionado::algorithms::Algorithm> lexical_cast(const std::string &name) {
 
-		return std::make_shared<algorithms::BrutForceAlgorithm>();
+		return std::make_shared<boxes_aficionado::algorithms::BrutForceAlgorithm>();
 
 	}
 
 	template<>
-	ExecutionMode_E lexical_cast(const std::string &name) {
-		static const std::map<const std::string, ExecutionMode_E> map = {
-				{std::to_string(static_cast<int>(ExecutionMode_E::solve)),            ExecutionMode_E::solve},
+	boxes_aficionado::ExecutionMode_E lexical_cast(const std::string &name) {
+		static const std::map<const std::string, boxes_aficionado::ExecutionMode_E> map = {
 				{std::to_string(
-						static_cast<int>(ExecutionMode_E::generateAndSolve)),         ExecutionMode_E::generateAndSolve},
-				{std::to_string(static_cast<int>(ExecutionMode_E::generateProblem)),  ExecutionMode_E::generateProblem}
+						static_cast<int>(boxes_aficionado::ExecutionMode_E::solve)),                    boxes_aficionado::ExecutionMode_E::solve},
+				{std::to_string(
+						static_cast<int>(boxes_aficionado::ExecutionMode_E::generateAndSolve)),         boxes_aficionado::ExecutionMode_E::generateAndSolve},
+				{std::to_string(
+						static_cast<int>(boxes_aficionado::ExecutionMode_E::generateProblem)),          boxes_aficionado::ExecutionMode_E::generateProblem}
 		};
+
 		return map.at(name);
 	}
 

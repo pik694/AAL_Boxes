@@ -5,9 +5,9 @@
 #ifndef AAL_BOXES_BOX_HPP
 #define AAL_BOXES_BOX_HPP
 
-#include <cstdint>
+#include <iostream>
 
-namespace boxes_aficionado {
+namespace boxes_aficionado::boxes {
 
 	class Box{
 	public:
@@ -32,6 +32,8 @@ namespace boxes_aficionado {
 		bool operator>=(const Box& rBox) const{
 			return !(this->operator<(rBox));
 		}
+
+		friend std::ostream &operator<<(std::ostream &, const Box &);
 
 	private:
 		uint16_t x_;

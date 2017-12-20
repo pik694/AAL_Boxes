@@ -1,4 +1,4 @@
-#include "boxes_aficionado/Box.hpp"
+#include "boxes_aficionado/boxes/Box.hpp"
 #include "boxes_aficionado/algorithms/BrutForceAlgorithm.hpp"
 #include "boxes_aficionado/ProgramInitializer.hpp"
 

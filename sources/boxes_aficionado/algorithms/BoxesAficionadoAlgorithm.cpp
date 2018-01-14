@@ -7,6 +7,7 @@
 using namespace boxes_aficionado;
 using namespace algorithms;
 
-std::pair<std::vector<Box>, uint64_t> BoxesAficionadoAlgorithm::compute(std::vector<Box> boxes) {
-	return std::make_pair(std::vector<Box>(), std::numeric_limits<uint64_t>::max());
+
+Algorithm::result_t BoxesAficionadoAlgorithm::compute(std::vector<boxes::Box> boxes) {
+	return std::make_pair(std::vector<boxes::Box>(), std::numeric_limits<units::box_volume_t>::max());
 }

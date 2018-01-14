@@ -6,19 +6,24 @@
 #define AAL_BOXES_BOX_HPP
 
 #include <iostream>
+#include "units.h"
 
 namespace boxes_aficionado::boxes {
 
 	class Box{
 	public:
 
-		Box(uint16_t x, uint16_t y, uint16_t z);
+		Box(units::box_size_t x, units::box_size_t y, units::box_size_t z);
 
-		uint64_t getVolume() const;
+		units::box_volume_t getVolume() const;
 
 		bool fits(const Box&) const;
 
 		int getID() const;
+
+		std::tuple<units::box_size_t, units::box_size_t, units::box_size_t> getMeasures() const {
+			return std::make_tuple(x_, y_, z_);
+		};
 
 		bool operator<(const Box& rBox) const{
 			return this->volume_ < rBox.volume_;
@@ -36,10 +41,10 @@ namespace boxes_aficionado::boxes {
 		friend std::ostream &operator<<(std::ostream &, const Box &);
 
 	private:
-		uint16_t x_;
-		uint16_t y_;
-		uint16_t z_;
-		uint64_t volume_;
+		units::box_size_t x_;
+		units::box_size_t y_;
+		units::box_size_t z_;
+		units::box_volume_t volume_;
 		int id_;
 		static int currID_;
 

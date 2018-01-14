@@ -11,8 +11,10 @@ if (Boost_FOUND)
     message(${Boost_INCLUDE_DIRS})
 endif ()
 
+include_directories(${PROJECT_SOURCE_DIR}/sources/boxes_aficionado)
 
-set(SOURCE_FILES sources/main.cpp sources/boxes_aficionado/boxes/Box.cpp sources/boxes_aficionado/algorithms/BrutForceAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.hpp sources/boxes_aficionado/boxes/BoxesProvider.hpp sources/boxes_aficionado/ProgramInitializer.hpp sources/boxes_aficionado/ProblemInstance.hpp sources/boxes_aficionado/boxes/BoxesGenerator.hpp)
+set(SOURCE_FILES sources/main.cpp sources/boxes_aficionado/boxes/Box.cpp sources/boxes_aficionado/algorithms/BrutForceAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.hpp sources/boxes_aficionado/boxes/boxes_provider/BoxesProvider.hpp sources/boxes_aficionado/program/ProgramInitializer.hpp sources/boxes_aficionado/program/SolveProgram.hpp sources/boxes_aficionado/boxes/boxes_provider/BoxesGenerator.hpp sources/boxes_aficionado/program/Program.h sources/boxes_aficionado/program/ProgramDecorator.h sources/boxes_aficionado/units.h sources/boxes_aficionado/RandomNumberGenerator.h sources/boxes_aficionado/boxes/boxes_provider/BoxesFileParser.h sources/boxes_aficionado/boxes/boxes_provider/BoxesStandardStreamParser.h sources/boxes_aficionado/program/result_printer/ResultPrinter.h sources/boxes_aficionado/program/ProgramInitializer.cpp)
+
 add_executable(AAL_Boxes ${SOURCE_FILES})
 
 if (Boost_FOUND)

@@ -10,7 +10,7 @@
 namespace boxes_aficionado::algorithms {
 	class BoxesAficionadoAlgorithm : Algorithm {
 	public:
-		virtual std::pair<std::vector<Box>, uint64_t> compute(std::vector<Box> vector) override;
+		virtual result_t compute(std::vector<boxes::Box> vector) override;
 
 	private:
 

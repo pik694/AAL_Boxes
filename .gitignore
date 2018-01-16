@@ -8,3 +8,8 @@
 cmake-build-debug/
 out
 gen
+scripts/tests
+.DS_Store
+sources/.DS_Store
+sources/scripts/.DS_Store
+sources/scripts/tests/

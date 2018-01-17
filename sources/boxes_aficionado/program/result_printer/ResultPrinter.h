@@ -34,10 +34,13 @@ namespace boxes_aficionado {
 					auto boxes = result.first;
 					auto volume = result.second;
 
+					units::box_volume_t maxVolume = 0;
+
 					for (auto &box : boxes) {
 						(*outStream_) << box.getID() << " ";
+						maxVolume += box.getVolume();
 					}
-					(*outStream_) << "\n" << volume << std::endl;
+					(*outStream_) << "\n" << maxVolume << "->" << volume << std::endl;
 
 				}
 

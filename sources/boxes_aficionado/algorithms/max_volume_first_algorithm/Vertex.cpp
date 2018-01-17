@@ -61,6 +61,10 @@ void Vertex::assignChild(Vertex *vertex) {
 	for (auto child : children_) {
 		child->removeParent(this);
 	}
+
+	children_.clear();
+
+	registerAsVertexWithoutPendingChildren();
 }
 
 void Vertex::appendOutputList(std::vector<boxes_aficionado::boxes::Box> &output) {

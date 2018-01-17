@@ -59,7 +59,6 @@ namespace boxes_aficionado::algorithms::max_volume_first_algorithm {
 
 		Vertex *child_;
 
-
 	};
 }
 

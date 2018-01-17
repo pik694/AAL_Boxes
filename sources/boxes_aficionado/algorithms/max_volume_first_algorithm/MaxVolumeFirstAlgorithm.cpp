@@ -6,35 +6,36 @@
 
 using namespace boxes_aficionado::algorithms::max_volume_first_algorithm;
 
-const auto comparator = [](const Vertex *v1, const Vertex *v2) {
-	return v1->getVolume() > v2->getVolume();
-};
+bool Compare::operator()(const Vertex *v1, const Vertex *v2) {
+	return v1->getVolume() < v2->getVolume();
+}
 
-MaxVolumeFirstAlgorithm::MaxVolumeFirstAlgorithm() :
-		verticesWithoutPendingChildren_(comparator) {
+
+MaxVolumeFirstAlgorithm::MaxVolumeFirstAlgorithm() {
 	Vertex::manager_ = this;
 }
 
 
 void MaxVolumeFirstAlgorithm::createConnections() {
 
-	for (auto box : boxes_) {
-		vertices_.emplace_back(std::move(box));
-		auto &currentVertex = vertices_.back();
+	vertices_.reserve(boxes_.size());
 
-		for (auto &vertex : vertices_) {
-			if (&vertex != &currentVertex) {
-				if (vertex.getBox().fits(currentVertex.getBox())) {
-					vertex.addParent(&currentVertex);
-					currentVertex.addChild(&vertex);
-				} else if (currentVertex.getBox().fits(vertex.getBox())) {
-					vertex.addChild(&currentVertex);
-					currentVertex.addParent(&vertex);
+	for (auto box : boxes_) {
+		vertices_.emplace_back(box);
+		auto currentVertex = --vertices_.end();
+
+		for (auto vertexIt = vertices_.begin(); vertexIt != vertices_.end(); ++vertexIt) {
+			if (vertexIt != currentVertex) {
+				if (vertexIt->getBox().fits(currentVertex->getBox())) {
+					vertexIt->addParent(&*currentVertex);
+					currentVertex->addChild(&*vertexIt);
+				} else if (currentVertex->getBox().fits(vertexIt->getBox())) {
+					vertexIt->addChild(&*currentVertex);
+					currentVertex->addParent(&*vertexIt);
 				}
 			}
 		}
 	}
-
 }
 
 void MaxVolumeFirstAlgorithm::registerAsPathHead(Vertex *vertex) {
@@ -42,7 +43,7 @@ void MaxVolumeFirstAlgorithm::registerAsPathHead(Vertex *vertex) {
 }
 
 void MaxVolumeFirstAlgorithm::registerAsVertexWithoutPendingChildren(Vertex *vertex) {
-//	verticesWithoutPendingChildren_.push(vertex);
+	verticesWithoutPendingChildren_.push(vertex);
 }
 
 algorithms::Algorithm::result_t MaxVolumeFirstAlgorithm::compute(std::vector<boxes::Box> vector) {
@@ -52,15 +53,15 @@ algorithms::Algorithm::result_t MaxVolumeFirstAlgorithm::compute(std::vector<box
 
 	for (auto &vertex : vertices_)
 		if (vertex.getInputsCount() == 0)
-//			verticesWithoutPendingChildren_.push(&vertex);
+			verticesWithoutPendingChildren_.push(&vertex);
 
-			while (!verticesWithoutPendingChildren_.empty()) {
+	while (!verticesWithoutPendingChildren_.empty()) {
 
-//		auto vertex = verticesWithoutPendingChildren_.top();
-//		verticesWithoutPendingChildren_.pop();
-//		vertex->findParent();
+		auto vertex = verticesWithoutPendingChildren_.top();
+		verticesWithoutPendingChildren_.pop();
+		vertex->findParent();
 
-			}
+	}
 
 	std::vector<boxes::Box> resultingSequence;
 

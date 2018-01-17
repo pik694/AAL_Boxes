@@ -14,8 +14,12 @@ namespace boxes_aficionado::algorithms::max_volume_first_algorithm {
 #include "Vertex.h"
 
 namespace boxes_aficionado::algorithms {
-
 	namespace max_volume_first_algorithm {
+
+		struct Compare{
+			bool operator()(const Vertex* v1, const Vertex* v2);
+		};
+
 		class MaxVolumeFirstAlgorithm : public boxes_aficionado::algorithms::Algorithm {
 		public:
 			MaxVolumeFirstAlgorithm();
@@ -37,7 +41,7 @@ namespace boxes_aficionado::algorithms {
 
 			using container_t = std::vector<Vertex *>;
 
-			std::priority_queue<Vertex *, container_t, bool> verticesWithoutPendingChildren_;
+			std::priority_queue<Vertex *, container_t, Compare> verticesWithoutPendingChildren_;
 			std::list<Vertex *> headsOfPaths_;
 		};
 	}

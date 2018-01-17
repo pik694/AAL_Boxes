@@ -11,15 +11,10 @@ namespace boxes_aficionado::algorithms {
 	class BrutForceAlgorithm : public Algorithm{
 	public:
 
-		BrutForceAlgorithm();
+		BrutForceAlgorithm() = default;
 
-		virtual std::pair<std::vector<boxes::Box>, uint64_t> compute(std::vector<boxes::Box>) override;
+		std::pair<std::vector<boxes::Box>, uint64_t> compute(std::vector<boxes::Box>) override;
 
-	private:
-
-		uint64_t getVolume(const std::vector<boxes::Box> &) const;
-		uint64_t minVolume_;
-		std::vector<boxes::Box> bestPermutation_;
 	};
 }
 

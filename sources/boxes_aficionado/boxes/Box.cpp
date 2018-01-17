@@ -9,7 +9,7 @@ using namespace boxes_aficionado::boxes;
 int Box::currID_ = 0;
 
 
-Box::Box(uint16_t x, uint16_t y, uint16_t z) : x_(x), y_(y), z_(z), id_(currID_++), volume_(x * y * z) {}
+Box::Box(uint16_t x, uint16_t y, uint16_t z) : x_(x), y_(y), z_(z), volume_(x * y * z), id_(currID_++) {}
 
 int Box::getID() const {
 	return id_;

@@ -7,7 +7,6 @@
 using namespace boxes_aficionado;
 using namespace boxes_aficionado::algorithms;
 
-BrutForceAlgorithm::BrutForceAlgorithm():minVolume_(std::numeric_limits<uint64_t>::max()) {}
 
 Algorithm::result_t BrutForceAlgorithm::compute(std::vector<boxes::Box> boxes) {
 
@@ -26,23 +25,5 @@ Algorithm::result_t BrutForceAlgorithm::compute(std::vector<boxes::Box> boxes) {
 
 	return std::make_pair(bestPermutation_, minVolume_);
 }
-
-uint64_t BrutForceAlgorithm::getVolume(const std::vector<boxes::Box> &boxes) const {
-
-	uint64_t volume = 0;
-
-	for (auto curr = boxes.cbegin(), next = ++boxes.cbegin(); next != boxes.cend(); ++curr, ++next) {
-
-		if (!curr->fits(*next)) {
-			volume += curr->getVolume();
-		}
-
-	}
-
-	volume += (--boxes.end())->getVolume();
-
-	return volume;
-}
-
 
 

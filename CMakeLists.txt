@@ -11,9 +11,11 @@ if (Boost_FOUND)
     message(${Boost_INCLUDE_DIRS})
 endif ()
 
+set(CMAKE_CXX_FLAGS "-Wall")
+
 include_directories(${PROJECT_SOURCE_DIR}/sources/boxes_aficionado)
 
-set(SOURCE_FILES sources/main.cpp sources/boxes_aficionado/boxes/Box.cpp sources/boxes_aficionado/algorithms/BrutForceAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.cpp sources/boxes_aficionado/algorithms/BoxesAficionadoAlgorithm.hpp sources/boxes_aficionado/boxes/boxes_provider/BoxesProvider.hpp sources/boxes_aficionado/program/ProgramInitializer.hpp sources/boxes_aficionado/program/SolveProgram.hpp sources/boxes_aficionado/boxes/boxes_provider/BoxesGenerator.hpp sources/boxes_aficionado/program/Program.h sources/boxes_aficionado/program/ProgramDecorator.h sources/boxes_aficionado/units.h sources/boxes_aficionado/RandomNumberGenerator.h sources/boxes_aficionado/boxes/boxes_provider/BoxesFileParser.h sources/boxes_aficionado/boxes/boxes_provider/BoxesStandardStreamParser.h sources/boxes_aficionado/program/result_printer/ResultPrinter.h sources/boxes_aficionado/program/ProgramInitializer.cpp)
+set(SOURCE_FILES sources/main.cpp sources/boxes_aficionado/boxes/Box.cpp sources/boxes_aficionado/algorithms/BrutForceAlgorithm.cpp sources/boxes_aficionado/algorithms/max_volume_first_algorithm/MaxVolumeFirstAlgorithm.cpp sources/boxes_aficionado/algorithms/max_volume_first_algorithm/MaxVolumeFirstAlgorithm.hpp sources/boxes_aficionado/boxes/boxes_provider/BoxesProvider.hpp sources/boxes_aficionado/program/ProgramInitializer.hpp sources/boxes_aficionado/program/SolveProgram.hpp sources/boxes_aficionado/boxes/boxes_provider/BoxesGenerator.hpp sources/boxes_aficionado/program/Program.h sources/boxes_aficionado/program/ProgramDecorator.h sources/boxes_aficionado/units.h sources/boxes_aficionado/RandomNumberGenerator.h sources/boxes_aficionado/boxes/boxes_provider/BoxesFileParser.h sources/boxes_aficionado/boxes/boxes_provider/BoxesStandardStreamParser.h sources/boxes_aficionado/program/result_printer/ResultPrinter.h sources/boxes_aficionado/program/ProgramInitializer.cpp sources/boxes_aficionado/algorithms/max_volume_first_algorithm/Vertex.cpp sources/boxes_aficionado/algorithms/max_volume_first_algorithm/Vertex.h)
 
 add_executable(AAL_Boxes ${SOURCE_FILES})
 

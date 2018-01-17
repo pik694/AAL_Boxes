@@ -15,6 +15,8 @@ namespace boxes_aficionado::boxes {
 
 		Box(units::box_size_t x, units::box_size_t y, units::box_size_t z);
 
+		Box(const Box &) = default;
+
 		units::box_volume_t getVolume() const;
 
 		bool fits(const Box&) const;

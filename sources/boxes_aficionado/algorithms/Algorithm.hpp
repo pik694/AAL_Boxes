@@ -18,6 +18,7 @@ namespace boxes_aficionado::algorithms {
 	enum class Algorithm_E {
 		BRUT_FORCE,
 		MAX_VOLUME_FIRST,
+		BRUT_FORCE_OPT
 	};
 
 	class Algorithm {

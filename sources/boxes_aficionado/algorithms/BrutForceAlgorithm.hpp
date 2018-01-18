@@ -15,6 +15,7 @@ namespace boxes_aficionado::algorithms {
 
 		std::pair<std::vector<boxes::Box>, uint64_t> compute(std::vector<boxes::Box>) override;
 
+		~BrutForceAlgorithm() override = default;
 	};
 }
 

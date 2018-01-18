@@ -5,6 +5,7 @@
 #include <fstream>
 #include <algorithms/BrutForceAlgorithm.hpp>
 #include <algorithms/max_volume_first_algorithm/MaxVolumeFirstAlgorithm.hpp>
+#include <algorithms/optimized_brut_force_algorithm/OptimizedBrutForceAlgorithm.h>
 #include "ProgramInitializer.hpp"
 #include "ProgramDecorator.h"
 
@@ -37,7 +38,8 @@ ProgramInitializer::ProgramInitializer(int argc, const char **argv) :
 
 			(command(ALGORITHM_SELECTION, "a").c_str(),
 			 value<algorithms::Algorithm_E>(&algorithm_)->default_value(algorithms::Algorithm_E::BRUT_FORCE, "0"),
-			 "Select algorithm:\n0 - brut force(default),\n1 - max volume first");
+			 "Select algorithm:\n0 - brut force(default),\n1 - max volume first\n2 - optimized brut forcels"
+					 "");
 
 }
 
@@ -130,6 +132,8 @@ std::unique_ptr<algorithms::Algorithm> ProgramInitializer::getAlgorithm() const 
 			return std::make_unique<algorithms::BrutForceAlgorithm>();
 		case algorithms::Algorithm_E::MAX_VOLUME_FIRST:
 			return std::make_unique<algorithms::max_volume_first_algorithm::MaxVolumeFirstAlgorithm>();
+		case algorithms::Algorithm_E::BRUT_FORCE_OPT:
+			return std::make_unique<algorithms::optimized_brut_force_algorithm::OptimizedBrutForceAlgorithm>();
 		default:
 			throw std::runtime_error("Invalid algorithm");
 	}
@@ -151,7 +155,9 @@ namespace boost {
 
 		static const std::map<const std::string, boxes_aficionado::algorithms::Algorithm_E> map = {
 				{std::to_string(static_cast<int>(Algorithm_E::BRUT_FORCE)), Algorithm_E::BRUT_FORCE},
-				{std::to_string(static_cast<int>(Algorithm_E::MAX_VOLUME_FIRST)), Algorithm_E::MAX_VOLUME_FIRST}
+				{std::to_string(static_cast<int>(Algorithm_E::MAX_VOLUME_FIRST)), Algorithm_E::MAX_VOLUME_FIRST},
+				{std::to_string(static_cast<int>(Algorithm_E::BRUT_FORCE_OPT)), Algorithm_E::BRUT_FORCE_OPT}
+
 		};
 
 		if (!map.count(name))

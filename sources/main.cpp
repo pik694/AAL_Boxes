@@ -1,16 +1,17 @@
-#include <iostream>
-#include "boxes_aficionado/Box.hpp"
+#include "boxes_aficionado/boxes/Box.hpp"
 #include "boxes_aficionado/algorithms/BrutForceAlgorithm.hpp"
+#include "boxes_aficionado/program/ProgramInitializer.hpp"
 
-using namespace boxes_aficionado;
+
+using namespace boxes_aficionado::program;
 using namespace boxes_aficionado::algorithms;
 
-int main(int argc, char** argv) {
+int main(int argc, const char **argv) {
 
+	ProgramInitializer initializer(argc, argv);
 
-	std::vector<Box> boxes = {{1,2,3}, {4,2,3}, };
-
-	std::cout << "Min : "  << BrutForceAlgorithm().compute(boxes) << std::endl;
+	initializer.getProgram()->run();
 
 	return 0;
 }
+

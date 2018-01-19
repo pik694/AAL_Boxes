@@ -21,8 +21,8 @@ Allowed options:
 ```
 ## Dane
 Dane wejściowe składają się z :
-	- liczby n, określającej ilość kartonów (wielkość problemu)
-	- n-linii, a w każdej z nich trzy liczby naturalne określające wymiary danego kartonu;
+- liczby n, określającej ilość kartonów (wielkość problemu)
+- n-linii, a w każdej z nich trzy liczby naturalne określające wymiary danego kartonu;
 
 Dane wyjściowe składają się z :
 - ciąg liczb, określających permutację kartonów, będącą odpowiedzią;
